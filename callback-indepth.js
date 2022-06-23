@@ -66,10 +66,34 @@ const filteredOutEven = nums.filter(isEven);
 // reduce
 
 const users = [
-  { firstName: "David", lastName: "test", age: 15 },
-  { firstName: "Mary", lastName: "test", age: 12 },
-  { firstName: "Larry", lastName: "test", age: 20 },
-  { firstName: "John", lastName: "test", age: 17 },
+  {
+    favoriateColor: "purple",
+    id: 1,
+    firstName: "David",
+    lastName: "Li",
+    age: 15,
+  },
+  {
+    favoriateColor: "blue",
+    id: 2,
+    firstName: "Mary",
+    lastName: "Lin",
+    age: 12,
+  },
+  {
+    favoriateColor: "purple",
+    id: 3,
+    firstName: "Larry",
+    lastName: "Johnson",
+    age: 20,
+  },
+  {
+    favoriateColor: "green",
+    id: 4,
+    firstName: "John",
+    lastName: "Legend",
+    age: 17,
+  },
 ];
 
 function getFirstNames(users) {
@@ -100,3 +124,77 @@ function getTeenagers(users) {
 }
 
 console.log("test", getTeenagers(users));
+
+function getOldest(users) {
+  let age = 0;
+  let oldestIndex = 0;
+  users.forEach((user, index) => {
+    if (user.age > age) {
+      age = user.age;
+      oldestIndex = index;
+    }
+  });
+  return users[oldestIndex];
+}
+
+// function getOldest2(users) {
+//   const ages = users.map((user) => user.age);
+//   const oldest = Math.max.apply(ages);
+//   const final = users.filter((user) => user.age === oldest);
+//   return final;
+// }
+
+console.log(getOldest(users));
+
+function getFullInitials(users) {
+  return users.map((user) => {
+    return `${user.firstName[0]}${user.lastName[0]}`;
+  });
+}
+
+console.log(getFullInitials(users));
+const string = "akflalfkalerre";
+console.log(string[5]);
+
+function getById(users, id) {
+  return users.filter((user) => user.id === id);
+}
+
+console.log(getById(users, 2));
+
+function getFavoriteColorList(users, color) {
+  const allPeopleLoveSomeColor = users.filter(
+    (user) => user.favoriateColor === color
+  );
+  return allPeopleLoveSomeColor;
+}
+
+const allPeopleLovePurple = getFavoriteColorList(users, "purple");
+console.log("test", allPeopleLovePurple);
+
+function fixCar(car) {
+  car.engine = "working";
+
+  return car;
+}
+
+function sellYourCarInTheBlackMarket(car) {
+  console.log(`car is sold to black market and the car is ${car}`);
+}
+
+function stealYourCar(car) {
+  sellYourCarInTheBlackMarket(car);
+  console.log("I made 30k for selling a stolen");
+}
+
+function bodyShop(car, amount) {
+  console.log(`$${amount} is deposited`);
+  const fixedCar = fixCar(car);
+  return fixedCar;
+}
+
+const car = { engine: "broken" };
+
+const myFixedCarInGoodCondition = bodyShop(car, 1000);
+
+console.log(myFixedCarInGoodCondition); // { engine: "working" };
